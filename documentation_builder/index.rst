@@ -13,6 +13,8 @@ Documentation for COBRApy
     escher
     milp
     qp
+    visbio
+    sampling
     cobra
 
 
