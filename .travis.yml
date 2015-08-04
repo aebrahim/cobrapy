@@ -3,12 +3,16 @@ sudo: false
 cache:
   directories:
     - $HOME/.cache/pip
+addons:
+  apt:
+    packages:
 python:
   - "2.7"
   - "3.4"
 addons:
   apt:
     packages:
+      - liblapack3gf
       - gfortran
       - libatlas-dev
       - libatlas-base-dev

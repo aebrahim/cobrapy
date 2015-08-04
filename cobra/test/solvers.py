@@ -20,6 +20,7 @@ except:
 
 class TestCobraSolver(object):
     def setUp(self):
+        from ..solvers import coin
         self.solver = solvers.solver_dict[self.solver_name]
         self.model = create_test_model("textbook")
         self.old_solution = 0.8739215
@@ -224,6 +225,9 @@ class TestCobraSolver(object):
     @skipIf(scipy is None, "scipy required for quadratic objectives")
     def test_quadratic(self):
         solver = self.solver
+        if hasattr(solver, "_set_quadratic_objective") and \
+                not hasattr(solver, "set_quadratic_objective"):
+            solver.set_quadratic_objective = solver._set_quadratic_objective
         if not hasattr(solver, "set_quadratic_objective"):
             self.skipTest("no qp support")
         c = Metabolite("c")
