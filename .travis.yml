@@ -25,7 +25,7 @@ before_install:
   - pip install pip --upgrade
   # These get cached
   - pip install numpy scipy python-libsbml -v  # verbose for long-running compiles
-  - pip install cython coveralls jsonschema six
+  - pip install cython coveralls jsonschema six pandas matplotlib jupyter
   - if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; then pip install lxml glpk pep8; fi
   # Download esolver and add it to the path
   - wget https://opencobra.github.io/pypi_cobrapy_travis/esolver.gz
@@ -35,6 +35,13 @@ install:
 # # command to run tests
 script:
   - coverage run --source=cobra setup.py test
+  - coverage run --source=cobra jupyter nbconvert --ExecutePreprocessor.enabled=True \
+      documentation_builder/phenotype_phase_plane.ipynb \
+      documentation_builder/getting_started.ipynb \
+      documentation_builder/simulating.ipynb \
+      documentation_builder/deletions.ipynb \
+      documentation_builder/faq.ipynb \
+      documentation_builder/building_model.ipynb
   - if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; then
     pep8 cobra/core cobra/design cobra/manipulation cobra/test cobra/version.py;
     fi
