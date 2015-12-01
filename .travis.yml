@@ -35,7 +35,7 @@ install:
 # # command to run tests
 script:
   - coverage run --source=cobra setup.py test
-  - coverage run --source=cobra jupyter nbconvert --ExecutePreprocessor.enabled=True \
+  - coverage run --source=cobra jupyter-nbconvert --ExecutePreprocessor.enabled=True \
       documentation_builder/phenotype_phase_plane.ipynb \
       documentation_builder/getting_started.ipynb \
       documentation_builder/simulating.ipynb \
